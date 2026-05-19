@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="fontawesome-i2svg-active fontawesome-i2svg-complete">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>知识产权知识竞赛</title>
+    <script src="static/3.4.17.js"></script>
+    <script src="static/all.min.js"></script>
+    <link href="static/fontawesome.min.css" rel="stylesheet">
+    <script src="static/confetti.browser.min.js"></script>
+    <link href="static/main.css" rel="stylesheet">
+    <script src="static/main.js"></script>
+</head>
+<body class="text-gray-800 h-screen flex flex-col overflow-hidden">
+<div class="flex-1 flex flex-col max-w-md mx-auto w-full bg-white shadow-2xl relative overflow-hidden h-full" id="app">
+    <div class="flex-1 flex flex-col p-6 fade-in h-full overflow-y-auto">
+        <div class="mb-8 text-center">
+            <div class="w-20 h-20 bg-blue-600 rounded-full mx-auto flex items-center justify-center mb-4 shadow-lg">
+                <svg class="svg-inline--fa fa-balance-scale text-3xl text-white" data-prefix="fas" data-icon="balance-scale" role="img"
+                     viewBox="0 0 640 512" aria-hidden="true" data-fa-i2svg="">
+                    <path fill="currentColor"
+                          d="M256 336h128c8.8 0 16-7.2 16-16V176c0-8.8-7.2-16-16-16H256c-8.8 0-16 7.2-16 16v144c0 8.8 7.2 16 16 16zm288-32c0 35.3-28.7 64-64 64s-64-28.7-64-64 28.7-64 64-64 64 28.7 64 64zm-448 0c0 35.3-28.7 64-64 64s-64-28.7-64-64 28.7-64 64-64 64 28.7 64 64zM576 64H384v96h192V64zm0 160H384v96h192v-96zm0 160H384v64h192v-64zM0 64v384h320V64H0z"></path>
+                </svg>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-800">知识产权知识竞赛</h1>
+            <p class="text-gray-500 text-sm mt-1">请使用学号和姓名登录</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-6">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">学号</label>
+                <input type="text" id="login-id"
+                       class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none transition"
+                       placeholder="请输入学号">
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2">姓名</label>
+                <input type="text" id="login-name"
+                       class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none transition"
+                       placeholder="请输入姓名">
+            </div>
+            <div id="login-error" class="text-red-500 text-sm mb-4 hidden text-center"></div>
+            <button onclick="handleLogin()"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow transition transform active:scale-95">
+                登 录
+            </button>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
