@@ -62,7 +62,8 @@ const state = {
     score: 0,
     answers: [],           // 用户答案
     submitted: [],         // 是否已提交
-    correctFlags: []       // 是否答对
+    correctFlags: [],      // 是否答对
+    quizMode: 'random'     // 试题模式: 'random'随机试题, 'all'全部试题
 };
 
 // ==========================================
@@ -156,6 +157,11 @@ function getRandomQuestions() {
     return shuffleArray(selected);
 }
 
+function getAllQuestions() {
+    // 获取全部试题并随机排序
+    return shuffleArray([...QUESTIONS]);
+}
+
 // ==========================================
 // 4. Render Functions
 // ==========================================
@@ -218,15 +224,32 @@ function renderDashboard() {
             </div>
 
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-6">
-                <div class="text-center mb-6">
-                    <div class="text-2xl font-bold text-blue-600 mb-2">随机${TOTAL_QUESTIONS}道题</div>
+                <h3 class="text-lg font-bold text-gray-800 mb-4 text-center">选择试题模式</h3>
+
+                <div class="mb-4 p-4 rounded-lg border-2 border-blue-200 bg-blue-50">
+                    <div class="text-center mb-3">
+                        <div class="text-xl font-bold text-blue-600">随机试题</div>
+                        <div class="text-sm text-gray-500 mt-1">随机抽取${TOTAL_QUESTIONS}道题</div>
+                    </div>
+                    <button onclick="startQuiz('random')"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow transition transform active:scale-95">
+                        开始答题
+                    </button>
                 </div>
-                <button onclick="startQuiz()"
-                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow transition transform active:scale-95 mb-3">
-                    开始答题
-                </button>
+
+                <div class="p-4 rounded-lg border-2 border-green-200 bg-green-50">
+                    <div class="text-center mb-3">
+                        <div class="text-xl font-bold text-green-600">全部试题</div>
+                        <div class="text-sm text-gray-500 mt-1">共${QUESTIONS.length}道题</div>
+                    </div>
+                    <button onclick="startQuiz('all')"
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow transition transform active:scale-95">
+                        开始答题
+                    </button>
+                </div>
+
                 <button onclick="logout()"
-                        class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-lg transition">
+                        class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-lg transition mt-4">
                     退出登录
                 </button>
             </div>
@@ -521,8 +544,9 @@ function handleLogin() {
     }
 }
 
-function startQuiz() {
-    state.currentQuestions = getRandomQuestions();
+function startQuiz(mode = 'random') {
+    state.quizMode = mode;
+    state.currentQuestions = mode === 'all' ? getAllQuestions() : getRandomQuestions();
     state.currentQuestionIndex = 0;
     state.score = 0;
     state.answers = [];
@@ -643,7 +667,7 @@ function submitExam() {
 }
 
 function restartQuiz() {
-    state.currentQuestions = getRandomQuestions();
+    state.currentQuestions = state.quizMode === 'all' ? getAllQuestions() : getRandomQuestions();
     state.currentQuestionIndex = 0;
     state.score = 0;
     state.answers = [];
