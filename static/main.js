@@ -4,8 +4,8 @@
 
 // 题目配置（可修改）
 const QUIZ_CONFIG = {
-    singleCount: 6,    // 单选题数量
-    multiCount: 4,     // 多选题数量
+    singleCount: 10,    // 单选题数量
+    multiCount: 0,     // 多选题数量
     judgeCount: 0,     // 判断题数量
     fillCount: 0,      // 填空题数量
     passScore: 100,      // 及格分数（百分比）
@@ -13,9 +13,27 @@ const QUIZ_CONFIG = {
     loginExpireDays: 30 // 登录有效期（天）
 };
 
+
+// 题目配置（可修改）
+const QUIZ_CONFIG_2 = {
+    singleCount: 104,    // 单选题数量
+    multiCount: 0,     // 多选题数量
+    judgeCount: 60,     // 判断题数量
+    fillCount: 29,      // 填空题数量
+    passScore: 100,      // 及格分数（百分比）
+    maxRecords: 20,     // 最多保存历史记录数
+    loginExpireDays: 30 // 登录有效期（天）
+};
+
+
 // 计算总题数
 const TOTAL_QUESTIONS = QUIZ_CONFIG.singleCount + QUIZ_CONFIG.multiCount +
                         QUIZ_CONFIG.judgeCount + QUIZ_CONFIG.fillCount;
+
+
+// 计算总题数
+const TOTAL_QUESTIONS_2 = QUIZ_CONFIG_2.singleCount + QUIZ_CONFIG_2.multiCount +
+    QUIZ_CONFIG_2.judgeCount + QUIZ_CONFIG_2.fillCount;
 
 // Data will be loaded from JSON files
 let STUDENTS = [];
@@ -158,8 +176,21 @@ function getRandomQuestions() {
 }
 
 function getAllQuestions() {
-    // 获取全部试题并随机排序
-    return shuffleArray([...QUESTIONS]);
+    // 按类型分组
+    const singleQuestions = QUESTIONS.filter(q => q.type === 'single');
+    const multiQuestions = QUESTIONS.filter(q => q.type === 'multi');
+    const judgeQuestions = QUESTIONS.filter(q => q.type === 'judge');
+    const fillQuestions = QUESTIONS.filter(q => q.type === 'fill');
+
+    // 随机抽取指定数量的题目
+    const selected = [
+        ...shuffleArray(singleQuestions).slice(0, QUIZ_CONFIG_2.singleCount),
+        ...shuffleArray(multiQuestions).slice(0, QUIZ_CONFIG_2.multiCount),
+        ...shuffleArray(judgeQuestions).slice(0, QUIZ_CONFIG_2.judgeCount),
+        ...shuffleArray(fillQuestions).slice(0, QUIZ_CONFIG_2.fillCount)
+    ];
+
+    return shuffleArray(selected);
 }
 
 // ==========================================
@@ -240,7 +271,7 @@ function renderDashboard() {
                 <div class="p-4 rounded-lg border-2 border-green-200 bg-green-50">
                     <div class="text-center mb-3">
                         <div class="text-xl font-bold text-green-600">全部试题</div>
-                        <div class="text-sm text-gray-500 mt-1">共${QUESTIONS.length}道题</div>
+                        <div class="text-sm text-gray-500 mt-1">共${TOTAL_QUESTIONS_2}道题</div>
                     </div>
                     <button onclick="startQuiz('all')"
                             class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow transition transform active:scale-95">
