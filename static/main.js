@@ -16,10 +16,10 @@ const QUIZ_CONFIG = {
 
 // 题目配置（可修改）
 const QUIZ_CONFIG_2 = {
-    singleCount: 104,    // 单选题数量
+    singleCount: 149,    // 单选题数量
     multiCount: 0,     // 多选题数量
-    judgeCount: 60,     // 判断题数量
-    fillCount: 29,      // 填空题数量
+    judgeCount: 0,     // 判断题数量
+    fillCount: 0,      // 填空题数量
     passScore: 100,      // 及格分数（百分比）
     maxRecords: 20,     // 最多保存历史记录数
     loginExpireDays: 30 // 登录有效期（天）
