@@ -16,7 +16,7 @@ const QUIZ_CONFIG = {
 
 // 题目配置（可修改）
 const QUIZ_CONFIG_2 = {
-    singleCount: 149,    // 单选题数量
+    singleCount: 150,    // 单选题数量
     multiCount: 0,     // 多选题数量
     judgeCount: 0,     // 判断题数量
     fillCount: 0,      // 填空题数量
